@@ -10,18 +10,13 @@ function generateNumber(num,arr){
             boolarray.push(arr[i][0]);
         }
         for(let j=1;j<arr[0].length;j++){
-            for(let i=1;i<arr[0].length;i++){
+            for(let i=0;i<arr.length;i++){
                 boolarray[i]|=arr[i][j];
             }
         }
-    }else{//num=1 means second multiplier
+    }else{//num=>1 means we copy
         for(let i=0;i<arr[0].length;i++){
-            boolarray.push(arr[0][i]);
-        }
-        for(let j=1;j<arr.length;j++){
-            for(let i=1;i<arr[0].length;i++){
-                boolarray[i]|=arr[j][i];
-            }
+            boolarray.push(arr[num-1][i]);
         }
     }
 
@@ -42,13 +37,13 @@ function wuerfle(ziffernarray){
 
 document.getElementById("start").onclick = start;
 document.getElementById("check").onclick = check;
-
+var arr = new Array(10);
 async function start(){
     let excercises=document.getElementById("excercises");
     let html="";//you cannot set innerHTML in a loop, when it is invalid
     html="<table>\n";
    
-    var arr = new Array(10);
+  
     for (var i = 0; i < arr.length; i++) {
         arr[i] = new Array(10).fill(true);
     }
@@ -58,33 +53,33 @@ async function start(){
         outer:
         for(let j=0;j<5;++j){  
             html+=`<td id=`+i+`_`+j+`>`;
-            while(true){
-                let a2=generateNumber(0,arr);
-                let b2=generateNumber(1,arr);
+           
+            let a2=generateNumber(0,arr);
+            let a=wuerfle(a2);
+            if(a==undefined) break outer;
+            let b2=generateNumber(a,arr);
 
-                let a=wuerfle(a2);
-                let b=wuerfle(b2);
-                if(a==undefined||b==undefined){
-                    break outer;
-                }
-                if( ! arr[a-1][b-1]) continue;
-                arr[a-1][b-1]=false;           
-                
-                let c=a*b
-                let type=Math.floor(Math.random()*3);
-            // type=0;
-                switch(type){
-                    case 0:
-                        html+=a+"*"+b+`= <input type="number" id="" name="" min="1" max="100"/>`;
-                        break;
-                    case 1:
-                        html+=a+`*<input type="number" id="" name="" min="1" max="100"/>=`+c;
-                        break;
-                    case 2:
-                        html+=`<input type="number" id="" name="" min="1" max="100"/>*`+b+"="+c;
-                        break;
-                }
-                break;
+          
+            let b=wuerfle(b2);
+            if(b==undefined){
+                break outer;
+            }
+            if( ! arr[a-1][b-1]) html+="!";
+            arr[a-1][b-1]=false;           
+            
+            let c=a*b
+            let type=Math.floor(Math.random()*3);
+        // type=0;
+            switch(type){
+                case 0:
+                    html+=a+"*"+b+`= <input type="number" id="" name="" min="1" max="100"/>`;
+                    break;
+                case 1:
+                    html+=a+`*<input type="number" id="" name="" min="1" max="100"/>=`+c;
+                    break;
+                case 2:
+                    html+=`<input type="number" id="" name="" min="1" max="100"/>*`+b+"="+c;
+                    break;
             }
 
             html+="</td>";
