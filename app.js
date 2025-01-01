@@ -47,7 +47,6 @@ function printit(){
 function update(){
     navigator.serviceWorker.getRegistration().then(function(reg) {
     if (reg) {
-        alert("unregistered")
       reg.unregister().then(function() { window.location.reload(true); });
     } else {
        window.location.reload(true);
