@@ -54,6 +54,7 @@ async function start(){
     }
   
     for(let i=0;i<20;++i){
+        outer:
         html+="<tr>\n";
         for(let j=0;j<5;++j){
             html+=`<td id=`+i+`_`+j+`>`;
@@ -64,7 +65,7 @@ async function start(){
                 let a=wuerfle(a2);
                 let b=wuerfle(b2);
                 if(a==undefined||b==undefined){
-                    break;
+                    break outer;
                 }
                 if( ! arr[a-1][b-1]) continue;
                 arr[a-1][b-1]=false;           
