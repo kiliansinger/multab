@@ -24,7 +24,7 @@
     text-align: center;
   }
   input[type=number] {
-    width: 5ch; /* 3 characters width */
+    width: 3ch; /* 3 characters width */
 }
 
 
