@@ -37,6 +37,23 @@ function wuerfle(ziffernarray){
 
 document.getElementById("start").onclick = start;
 document.getElementById("check").onclick = check;
+document.getElementById("update").onclick = update;
+document.getElementById("print").onclick = printit;
+addEventListener("DOMContentLoaded", (event) => {start();});
+
+function printit(){
+    window.print();
+}
+function update(){
+    navigator.serviceWorker.getRegistration().then(function(reg) {
+    if (reg) {
+        alert("unregistered")
+      reg.unregister().then(function() { window.location.reload(true); });
+    } else {
+       window.location.reload(true);
+    }
+  });
+}
 var arr = new Array(10);
 async function start(){
     let excercises=document.getElementById("excercises");

@@ -30,7 +30,7 @@
 	</noscript>
 
 	<script>
-        let serviceworkeractivate=false;
+        let serviceworkeractivate=true;
 		if (serviceworkeractivate && "serviceWorker" in navigator) {
 			window.addEventListener("load", () => {
 				navigator.serviceWorker.register("./service-worker.js").then((reg) => {
@@ -44,12 +44,20 @@
     
 
     <div class="frontpage">
-        <H3>Ein mal eins. <button id="start">Start</button><button id="check">Check</button></H3>
+		
+		<ul class="no-print" id="menu">
+			<li><a id="start">Neu</a></li>
+			<li><a id="check">Prüfen</a></li>
+			<li><a id="print">Drucken</a></li>
+			<li><a id="update">Update</a></li>
+		</ul>
+		<h3>Ein mal eins</h3>
+		<p class="no-print">Ausfüllen und auf Check clicken. Neu erzeugt neue Aufgaben, oder ausdrucken (Menü und dieser Text verschwindet).</p>
         <div id="excercises">
-            Bitte auf Start drücken. Dann ausdrucken oder auf Webseite eintippen und Check drücken.
+            
         </div>
     </div>
-      
+    
     <script src="app.js"></script>
 </body>
 </html>
