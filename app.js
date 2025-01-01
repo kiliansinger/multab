@@ -54,9 +54,9 @@ async function start(){
     }
   
     for(let i=0;i<20;++i){
-        outer:
         html+="<tr>\n";
-        for(let j=0;j<5;++j){
+        outer:
+        for(let j=0;j<5;++j){  
             html+=`<td id=`+i+`_`+j+`>`;
             while(true){
                 let a2=generateNumber(0,arr);
