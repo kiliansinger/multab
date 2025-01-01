@@ -116,9 +116,11 @@ async function check(){
             check=check.replaceAll("=","==");
             try{
                 if(eval(check)){
-                    td.style.backgroundColor="lightgreen";
+                    if(td.style.backgroundColor=="pink" || td.style.backgroundColor=="lightblue" )
+                        td.style.backgroundColor="lightblue";
+                    else td.style.backgroundColor="lightgreen";
                 }else{
-                    td.style.backgroundColor="red";
+                    td.style.backgroundColor="pink";
                 }
             }
             catch(err){
