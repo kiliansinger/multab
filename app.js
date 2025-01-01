@@ -57,30 +57,33 @@ async function start(){
         html+="<tr>\n";
         for(let j=0;j<5;++j){
             html+=`<td id=`+i+`_`+j+`>`;
-            let a2=generateNumber(0,arr);
-            let b2=generateNumber(1,arr);
+            while(true){
+                let a2=generateNumber(0,arr);
+                let b2=generateNumber(1,arr);
 
-            let a=wuerfle(a2);
-            let b=wuerfle(b2);
-            if(a==undefined||b==undefined){
+                let a=wuerfle(a2);
+                let b=wuerfle(b2);
+                if(a==undefined||b==undefined){
+                    break;
+                }
+                if( ! arr[a-1][b-1]) continue;
+                arr[a-1][b-1]=false;           
+                
+                let c=a*b
+                let type=Math.floor(Math.random()*3);
+            // type=0;
+                switch(type){
+                    case 0:
+                        html+=a+"*"+b+`= <input type="number" id="" name="" min="1" max="100"/>`;
+                        break;
+                    case 1:
+                        html+=a+`*<input type="number" id="" name="" min="1" max="100"/>=`+c;
+                        break;
+                    case 2:
+                        html+=`<input type="number" id="" name="" min="1" max="100"/>*`+b+"="+c;
+                        break;
+                }
                 break;
-            }
-
-            arr[a-1][b-1]=false;           
-            
-            let c=a*b
-            let type=Math.floor(Math.random()*3);
-           // type=0;
-            switch(type){
-                case 0:
-                    html+=a+"*"+b+`= <input type="number" id="" name="" min="1" max="100"/>`;
-                    break;
-                case 1:
-                    html+=a+`*<input type="number" id="" name="" min="1" max="100"/>=`+c;
-                    break;
-                case 2:
-                    html+=`<input type="number" id="" name="" min="1" max="100"/>*`+b+"="+c;
-                    break;
             }
 
             html+="</td>";
