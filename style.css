@@ -1,0 +1,28 @@
+@page {
+    size: A4
+  }
+
+  td{
+    padding-right:20px;
+    padding-left:20px;
+    padding-top:20px;
+    padding-bottom:z20px;
+  }
+  
+  .frontpage {
+    display: flex;
+    justify-content: space-between; /* ADJUSTED */
+    align-items: center;
+    flex-direction: column;         /* NEW */
+  }
+  
+  .frontpage::before {              /* NEW */
+    content: '';
+  }
+  
+  .frontpage > * {
+    text-align: center;
+  }
+  input[type=number] {
+    width: 5ch; /* 3 characters width */
+}

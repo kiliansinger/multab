@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>multab</title>
+    <link rel="stylesheet" href="style.css">
+    
+   
+	<link rel="manifest" href="./manifest.json" />
+	<meta name="description" content="multab" />
+	<meta name="theme-color" content="#2F3BA2" />
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="apple-mobile-web-app-title" content="SIcalc" />
+	<link rel="apple-touch-icon" href="./images/icons/icon-152x152.png" />
+
+	<link rel="icon" type="image/png" href="./images/favicon.png" />
+	
+	<META HTTP-EQUIV="content-type" CONTENT="text/html; charset=utf-8">
+	<meta http-equiv="Cache-control" content="no-cache">
+	<meta http-equiv="Cache-control" content="no-store">
+
+</head>
+<body> 
+    <noscript>
+		<div>Oops! Javascript required here! Allow it and try again!</div>
+	</noscript>
+
+	<script>
+        let serviceworkeractivate=false;
+		if (serviceworkeractivate && "serviceWorker" in navigator) {
+			window.addEventListener("load", () => {
+				navigator.serviceWorker.register("./service-worker.js").then((reg) => {
+					console.log("Service worker registered.", reg);
+				});
+			});
+		}
+	</script>
+   
+    
+    
+
+    <div class="frontpage">
+        <H3>Ein mal eins. <button id="start">Start</button><button id="check">Check</button></H3>
+        <div id="excercises">
+            Bitte auf Start drücken. Dann ausdrucken oder auf Webseite eintippen und Check drücken.
+        </div>
+    </div>
+      
+    <script src="app.js"></script>
+</body>
+</html>
