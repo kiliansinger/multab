@@ -71,7 +71,8 @@ async function start(op2,text=false){
     let excercises=document.getElementById("excercises");
     let html="";//you cannot set innerHTML in a loop, when it is invalid
     html="<table>\n";
-    
+    let exclude=document.getElementById("exclude").value.match(/\d+/g);
+    console.log(exclude);
     arr = new Array(op2.length);
     for (var i = 0; i < arr.length; i++) {
         arr[i] = new Array(op2[i][1]);
@@ -79,7 +80,18 @@ async function start(op2,text=false){
             arr[i][j]=new Array(op2[i][1]).fill(true);
         }
     }
-  
+    for (var i = 0; i < arr.length; i++) {
+        for (var j = 0; j < arr[i].length; j++) {
+            exclude?.forEach(el => {
+                console.log(el,j)
+                if(el-1<op2[i][1]){
+                    arr[i][el-1][j]=false;
+                    arr[i][j][el-1]=false;
+                }
+            });
+        }
+    }
+    
     for(let i=0;i<20;++i){
         html+="<tr>\n";
         outer:
