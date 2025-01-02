@@ -144,7 +144,7 @@ async function start(op2,text=false){
                                 break;
                             case "-":
                                 html+="Mama kauft "+a+" Kekse. Drache Frido bekommt "+b+` Kekse. Wie viel Kekse hat Mama noch? <!--`+a+`-`+b+`=x--><input type="number" id="" name="" min="1" max="100"/>`;
-                                break;
+                                break;g
                             case "/":
                                 html+="Mama kauft "+a+" Kekse. Sie hat "+b+` Kinderdrachen bei der Geburtstagsparty. Wie viele Kekse bekommt jeder Kinderdrache? <!--`+a+`/`+b+`=x--><input type="number" id="" name="" min="1" max="100"/>`;
                                 break;
@@ -178,7 +178,7 @@ async function start(op2,text=false){
                             html+=`Mama kauft <!--x-`+b+`=`+c+`--><input type="number" id="" name="" min="1" max="100"/> Kekse. Drache Frido bekommt `+b+` Kekse. Mama hat noch `+c+` Kekse.`;
                             break;
                         case "/":
-                            html+=`Mama kauft <!--x/`+b+`=`+c+`--><input type="number" id="" name="" min="1" max="100"/>. Sie hat `+b+` Kinderdrachen bei der Geburtstagsparty. Jeder Kinderdrache bekommt `+c+" Kekse.";
+                            html+=`Mama kauft <!--x/`+b+`=`+c+`--><input type="number" id="" name="" min="1" max="100"/> Kekse. Sie hat `+b+` Kinderdrachen bei der Geburtstagsparty. Jeder Kinderdrache bekommt `+c+" Kekse.";
                             break;
                     }
                     break;
