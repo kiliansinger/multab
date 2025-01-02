@@ -35,11 +35,12 @@ function wuerfle(ziffernarray){
     return ziffernarray[index];
 }
 
-document.getElementById("start").onclick = start;
+document.getElementById("startmul").onclick = ()=>{start("*")};
+document.getElementById("startadd").onclick = ()=>{start("+")};
 document.getElementById("check").onclick = check;
 document.getElementById("update").onclick = update;
 document.getElementById("print").onclick = printit;
-addEventListener("DOMContentLoaded", (event) => {start();});
+addEventListener("DOMContentLoaded", (event) => {start("*");});
 
 function printit(){
     window.print();
@@ -54,7 +55,7 @@ function update(){
   });
 }
 var arr = new Array(10);
-async function start(){
+async function start(op){
     let excercises=document.getElementById("excercises");
     let html="";//you cannot set innerHTML in a loop, when it is invalid
     html="<table>\n";
@@ -81,20 +82,29 @@ async function start(){
                 break outer;
             }
             if( ! arr[a-1][b-1]) html+="!";
-            arr[a-1][b-1]=false;           
-            
-            let c=a*b
+            arr[a-1][b-1]=false;     
+            let c;      
+            switch(op){
+                case "+":
+                    c=a+b;
+                    break;
+                case "*":
+                    c=a*b
+                    break;
+            }
+      
             let type=Math.floor(Math.random()*3);
         // type=0;
+     
             switch(type){
                 case 0:
-                    html+=a+"*"+b+`= <input type="number" id="" name="" min="1" max="100"/>`;
+                    html+=""+a+op+b+`= <input type="number" id="" name="" min="1" max="100"/>`;
                     break;
                 case 1:
-                    html+=a+`*<input type="number" id="" name="" min="1" max="100"/>=`+c;
+                    html+=""+a+op+`<input type="number" id="" name="" min="1" max="100"/>=`+c;
                     break;
                 case 2:
-                    html+=`<input type="number" id="" name="" min="1" max="100"/>*`+b+"="+c;
+                    html+=`<input type="number" id="" name="" min="1" max="100"/>`+op+b+"="+c;
                     break;
             }
 
@@ -112,23 +122,13 @@ async function check(){
             let td=document.getElementById(i+"_"+j);
             if(td===undefined) continue;
             let input=td.getElementsByTagName("input")[0];
-            let html=td.innerText.trim();
-            let check="";
-            if(html.startsWith("*")){
-                check=input.value+html;
+            if(input.value=="") {
+                td.style.backgroundColor="white";
+                continue;
             }
-            else if(html.endsWith("=")){
-                check=html+input.value;
-            }
-            else{
-                let parts=html.split("*");
-                let parts2=html.split("=");
-                check=parts[0]+"*"+input.value+"="+parts2[1];
+            let html=td.innerHTML.trim();
+            let check=html.replace(/<.*>/,input.value);
 
-            }
-    
-
-            //console.log(html+"???"+check);
             check=check.replaceAll("=","==");
             try{
                 if(eval(check)){
