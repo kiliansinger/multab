@@ -76,6 +76,8 @@ async function start(op2,text=false){
     let html="";//you cannot set innerHTML in a loop, when it is invalid
     html="<table>\n";
     let exclude=document.getElementById("exclude").value.match(/\d+/g);
+    let excluderange=document.getElementById("exclude").value.match(/\d+-\d+/g);
+    console.log(excluderange);
     console.log(exclude);
     arr = new Array(op2.length);
     for (var i = 0; i < arr.length; i++) {
@@ -87,10 +89,24 @@ async function start(op2,text=false){
     for (var i = 0; i < arr.length; i++) {
         for (var j = 0; j < arr[i].length; j++) {
             exclude?.forEach(el => {
-                console.log(el,j)
                 if(el-1<op2[i][1]){
                     arr[i][el-1][j]=false;
                     arr[i][j][el-1]=false;
+                }
+            });
+        }
+    }
+    for (var i = 0; i < arr.length; i++) {
+        for (var j = 0; j < arr[i].length; j++) {
+            excluderange?.forEach(el => {
+                let r=el.match(/\d+/g);
+                if(r[0]<0) r[0]=0;
+                if(r[1]>arr[i].length) r[1]=arr[i].length;
+                for(let k=r[0];k<=r[1];++k){
+                    if(k-1<op2[i][1]){
+                        arr[i][k-1][j]=false;
+                        arr[i][j][k-1]=false;
+                    }
                 }
             });
         }
