@@ -65,6 +65,9 @@ function update(){
 }
 let arr;
 async function start(op2,text=false){
+    for(let i=0;i<op2.length;++i){
+        op2[i].push(i);//put index into op2[i][2]
+    }
    // if(text===undefined) text=false;
     if(text) document.getElementById("comment").innerText="Heute ist Drachengeburtstag. Aber was für ein Durcheinander. Sie muss die Kekse verteilen aber der Text hat Lücken. Fülle die Lücken aus.";
     else document.getElementById("comment").innerText="";
@@ -98,23 +101,35 @@ async function start(op2,text=false){
         for(let j=0;j<(text?1:5);++j){  
             html+=`<td id=`+i+`_`+j+`>`;
             let op;
-            let opindex=Math.floor(Math.random()*op2.length);
-  
-            op=op2[opindex][0];
-          
-           
-            let a2=generateNumber(0,arr[opindex]);
-            let a=wuerfle(a2);
-            if(a==undefined) break outer;
-            let b2=generateNumber(a,arr[opindex]);
+            let opindex,a,b;
+            while(true){
+                if(op2.length==0) break outer;
+                opindex=Math.floor(Math.random()*op2.length);
+                //todo do here some avoiding of completed arrays
+                op=op2[opindex][0];
+            
+            
+                let a2=generateNumber(0,arr[op2[opindex][2]]);
+                a=wuerfle(a2);
+                if(a==undefined) {
+                    op2.splice(opindex, 1);
+                    console.log("splice",op2);
+                    continue;
+                }
+                let b2=generateNumber(a,arr[op2[opindex][2]]);
 
-          
-            let b=wuerfle(b2);
-            if(b==undefined){
-                break outer;
+            
+                b=wuerfle(b2);
+                if(b==undefined){
+                    op2.splice(opindex, 1);
+                    console.log("splice",op2);
+                    continue;
+                }
+                break;
             }
-            if( ! arr[opindex][a-1][b-1]) html+="!";
-            arr[opindex][a-1][b-1]=false;     
+
+            if( ! arr[op2[opindex][2]][a-1][b-1]) html+="!";
+            arr[op2[opindex][2]][a-1][b-1]=false;     
             let c;      
             //check if type of op is array
         
