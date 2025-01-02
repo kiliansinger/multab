@@ -35,12 +35,20 @@ function wuerfle(ziffernarray){
     return ziffernarray[index];
 }
 
-document.getElementById("startmul").onclick = ()=>{start("*")};
-document.getElementById("startadd").onclick = ()=>{start("+")};
+
+document.getElementById("startadd").onclick = ()=>{start("+",10)};
+document.getElementById("startadd2").onclick = ()=>{start("+",100)};
+document.getElementById("startsub").onclick = ()=>{start("-",10)};
+document.getElementById("startsub2").onclick = ()=>{start("-",100)};
+document.getElementById("startaddsub2").onclick = ()=>{start(["+","-"],100)};
+document.getElementById("startmul").onclick = ()=>{start("*",10)};
+document.getElementById("startdiv").onclick = ()=>{start("/",10)};
+document.getElementById("startmuldiv").onclick = ()=>{start(["*","/"],10)};
+document.getElementById("startall").onclick = ()=>{start(["*","/","+","-"],10)};
 document.getElementById("check").onclick = check;
 document.getElementById("update").onclick = update;
 document.getElementById("print").onclick = printit;
-addEventListener("DOMContentLoaded", (event) => {start("*");});
+addEventListener("DOMContentLoaded", (event) => {start("*",10);});
 
 function printit(){
     window.print();
@@ -54,15 +62,15 @@ function update(){
     }
   });
 }
-var arr = new Array(10);
-async function start(op){
+
+async function start(op2,max){
     let excercises=document.getElementById("excercises");
     let html="";//you cannot set innerHTML in a loop, when it is invalid
     html="<table>\n";
    
-  
+    var arr = new Array(max);
     for (var i = 0; i < arr.length; i++) {
-        arr[i] = new Array(10).fill(true);
+        arr[i] = new Array(max).fill(true);
     }
   
     for(let i=0;i<20;++i){
@@ -84,6 +92,15 @@ async function start(op){
             if( ! arr[a-1][b-1]) html+="!";
             arr[a-1][b-1]=false;     
             let c;      
+            //check if type of op is array
+            let op;
+            if(Array.isArray(op2)){
+                let index=Math.floor(Math.random()*op2.length);
+                op=op2[index];
+            }else{
+                op=op2;
+            }
+
             switch(op){
                 case "+":
                     c=a+b;
@@ -91,11 +108,25 @@ async function start(op){
                 case "*":
                     c=a*b
                     break;
+                case "-":
+                    if(a<b){
+                        let temp=a;
+                        a=b;
+                        b=temp;
+                    }
+                    c=a-b;
+                    break;
+                case "/": 
+                    c=a*b;
+                    let temp=a;
+                    a=c;
+                    c=temp;
+                    break;
             }
       
             let type=Math.floor(Math.random()*3);
         // type=0;
-     
+            
             switch(type){
                 case 0:
                     html+=""+a+op+b+`= <input type="number" id="" name="" min="1" max="100"/>`;
