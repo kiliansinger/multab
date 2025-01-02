@@ -45,11 +45,12 @@ document.getElementById("startmul").onclick = ()=>{start([["*",10]])};
 document.getElementById("startdiv").onclick = ()=>{start([["/",10]])};
 document.getElementById("startmuldiv").onclick = ()=>{start([["*",10],["/",10]])};
 document.getElementById("startall").onclick = ()=>{start([["*",10],["/",10],["+",100],["-",100]])};
-document.getElementById("starttext").onclick = ()=>{start([["*",10],["/",10],["+",10],["-",10]],true)}
+document.getElementById("starttextmul").onclick = ()=>{start([["*",10],["/",10]],true)}
+document.getElementById("starttextall").onclick = ()=>{start([["*",10],["/",10],["+",10],["-",10]],true)}
 document.getElementById("check").onclick = check;
 document.getElementById("update").onclick = update;
 document.getElementById("print").onclick = printit;
-addEventListener("DOMContentLoaded", (event) => {document.getElementById("starttext").click()});
+addEventListener("DOMContentLoaded", (event) => {document.getElementById("starttextmul").click()});
 
 function printit(){
     window.print();
