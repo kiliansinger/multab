@@ -66,7 +66,7 @@ function update(){
 let arr;
 async function start(op2,text=false){
    // if(text===undefined) text=false;
-    if(text) document.getElementById("comment").innerText="Heute ist Drachengeburtstag. Aber was für ein Durcheinander. Sie muss die Kekse verteilen aber der Text hat Lücken. Fülle Sie aus.";
+    if(text) document.getElementById("comment").innerText="Heute ist Drachengeburtstag. Aber was für ein Durcheinander. Sie muss die Kekse verteilen aber der Text hat Lücken. Fülle die Lücken aus.";
     else document.getElementById("comment").innerText="";
     let excercises=document.getElementById("excercises");
     let html="";//you cannot set innerHTML in a loop, when it is invalid
@@ -137,16 +137,16 @@ async function start(op2,text=false){
                     case 0://letztes ffeld input
                         switch(op){
                             case "*":
-                                html+="Jeder der "+a+" Drachen bekommt "+b+` Kekse. Wieviel Kekse muss die Drachenmama kaufen? <!--`+a+`*`+b+`=x--><input type="number" id="" name="" min="1" max="100"/>`;
+                                html+="Jeder der "+a+" Drachen bekommt "+b+` Kekse. Wie viel Kekse muss die Drachenmama kaufen? <!--`+a+`*`+b+`=x--><input type="number" id="" name="" min="1" max="100"/>`;
                                 break;
                             case "+":
-                                html+="Drache Susi bekommt "+a+" Kekse und Drache Frido bekommt "+b+` Kekse. Wieviel Kekse haben sie zusammen? <!--`+a+`+`+b+`=x--><input type="number" id="" name="" min="1" max="100"/>`;
+                                html+="Drache Susi bekommt "+a+" Kekse und Drache Frido bekommt "+b+` Kekse. Wie viel Kekse haben sie zusammen? <!--`+a+`+`+b+`=x--><input type="number" id="" name="" min="1" max="100"/>`;
                                 break;
                             case "-":
-                                html+="Mama kauft "+a+" Kekse. Drache Frido bekommt "+b+` Kekse. Wieviel Kekse hat Mama noch? <!--`+a+`-`+b+`=x--><input type="number" id="" name="" min="1" max="100"/>`;
+                                html+="Mama kauft "+a+" Kekse. Drache Frido bekommt "+b+` Kekse. Wie viel Kekse hat Mama noch? <!--`+a+`-`+b+`=x--><input type="number" id="" name="" min="1" max="100"/>`;
                                 break;
                             case "/":
-                                html+="Mama kauft "+a+" Kekse. Sie hat "+b+` Kinderdrachen bei der Geburtstagsparty. Wieviele Kekse bekommt jeder Kinderdrachen? <!--`+a+`/`+b+`=x--><input type="number" id="" name="" min="1" max="100"/>`;
+                                html+="Mama kauft "+a+" Kekse. Sie hat "+b+` Kinderdrachen bei der Geburtstagsparty. Wie viele Kekse bekommt jeder Kinderdrache? <!--`+a+`/`+b+`=x--><input type="number" id="" name="" min="1" max="100"/>`;
                                 break;
                         }
                         break;
@@ -162,7 +162,7 @@ async function start(op2,text=false){
                             html+="Mama kauft "+a+" Kekse. Drache Frido bekommt "+`<!--`+a+`-x=`+c+`--><input type="number" id="" name="" min="1" max="100"/> Kekse. Mama hat noch `+c+` Kekse.`;
                             break;
                         case "/":
-                            html+="Mama kauft "+a+" Kekse. Sie hat "+`<!--`+a+`/x=`+c+`--><input type="number" id="" name="" min="1" max="100"/> Kinderdrachen bei der Geburtstagsparty. Jeder Kinderdrachen bekommt `+c+" Kekse.";
+                            html+="Mama kauft "+a+" Kekse. Sie hat "+`<!--`+a+`/x=`+c+`--><input type="number" id="" name="" min="1" max="100"/> Kinderdrachen bei der Geburtstagsparty. Jeder Kinderdrache bekommt `+c+" Kekse.";
                             break;
                     }
                     break;
@@ -178,7 +178,7 @@ async function start(op2,text=false){
                             html+=`Mama kauft <!--x-`+b+`=`+c+`--><input type="number" id="" name="" min="1" max="100"/> Kekse. Drache Frido bekommt `+b+` Kekse. Mama hat noch `+c+` Kekse.`;
                             break;
                         case "/":
-                            html+=`Mama kauft <!--x/`+b+`=`+c+`--><input type="number" id="" name="" min="1" max="100"/>. Sie hat `+b+` Kinderdrachen bei der Geburtstagsparty. Jeder Kinderdrachen bekommt `+c+" Kekse.";
+                            html+=`Mama kauft <!--x/`+b+`=`+c+`--><input type="number" id="" name="" min="1" max="100"/>. Sie hat `+b+` Kinderdrachen bei der Geburtstagsparty. Jeder Kinderdrache bekommt `+c+" Kekse.";
                             break;
                     }
                     break;
