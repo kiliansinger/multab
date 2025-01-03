@@ -84,10 +84,19 @@ async function start(op2,text=false){
     //maxval overrides op2[i][1]
     console.log(maxval);
     let defaultval=true;
+    let mask=[];
     if(maxval>-Infinity){
         for(let i=0;i<op2.length;++i){
             op2[i][1]=maxval;
         }
+        mask=new Array(maxval).fill(false);
+        numbers?.forEach(el => mask[el-1]=true);
+        range?.forEach(el => {
+            let r=el.match(/\d+/g);
+            if(r[0]<0) r[0]=0;
+            for(let k=r[0];k<=r[1];++k) mask[k-1]=true;
+        });
+
         defaultval=false;
     }
     
@@ -98,34 +107,17 @@ async function start(op2,text=false){
             arr[i][j]=new Array(op2[i][1]).fill(defaultval);
         }
     }
+
+    
     for (var i = 0; i < arr.length; i++) {
-       // for (var j = 0; j < arr[i].length; j++) {
-            numbers?.forEach(el => {
-                numbers?.forEach(el2 => {
-                    if(el-1<op2[i][1]){
-                        arr[i][el-1][el2-1]=true;
-                        arr[i][el2-1][el-1]=true;
-                    }
-                });
-            });
-        //}
-    }
-    for (var i = 0; i < arr.length; i++) {
-        for (var j = 0; j < arr[i].length; j++) {
-            range?.forEach(el => {
-                let r=el.match(/\d+/g);
-                if(r[0]<0) r[0]=0;
-                if(r[1]>arr[i].length) r[1]=arr[i].length;
-                for(let k=r[0];k<=r[1];++k){
-                    if(k-1<op2[i][1]){
-                        arr[i][k-1][j]=true;
-                        arr[i][j][k-1]=true;
-                    }
-                }
-            });
+        for(j=0;j<mask.length;++j){
+            for(k=0;k<mask.length;++k){
+                arr[i][j][k]=mask[j] && mask[k];
+            }
         }
     }
-    
+      
+
     for(let i=0;i<20;++i){
         html+="<tr>\n";
         outer:
