@@ -50,7 +50,7 @@ document.getElementById("starttextall").onclick = ()=>{start([["*",10],["/",10],
 document.getElementById("check").onclick = check;
 document.getElementById("update").onclick = update;
 document.getElementById("print").onclick = printit;
-addEventListener("DOMContentLoaded", (event) => {document.getElementById("starttextmul").click()});
+addEventListener("DOMContentLoaded", (event) => {document.getElementById("startmul").click()});
 
 function printit(){
     window.print();
@@ -75,37 +75,51 @@ async function start(op2,text=false){
     let excercises=document.getElementById("excercises");
     let html="";//you cannot set innerHTML in a loop, when it is invalid
     html="<table>\n";
-    let exclude=document.getElementById("exclude").value.match(/\d+/g);
-    let excluderange=document.getElementById("exclude").value.match(/\d+-\d+/g);
-    console.log(excluderange);
-    console.log(exclude);
+    let numbers=document.getElementById("range").value.match(/\d+/g);
+    let range=document.getElementById("range").value.match(/\d+-\d+/g);
+    console.log(range);
+    console.log(numbers);
+    if(numbers==null) numbers=[];
+    let maxval=Math.max(...numbers);
+    //maxval overrides op2[i][1]
+    console.log(maxval);
+    let defaultval=true;
+    if(maxval>-Infinity){
+        for(let i=0;i<op2.length;++i){
+            op2[i][1]=maxval;
+        }
+        defaultval=false;
+    }
+    
     arr = new Array(op2.length);
     for (var i = 0; i < arr.length; i++) {
         arr[i] = new Array(op2[i][1]);
         for (var j = 0; j < arr[i].length; j++) {
-            arr[i][j]=new Array(op2[i][1]).fill(true);
+            arr[i][j]=new Array(op2[i][1]).fill(defaultval);
         }
     }
     for (var i = 0; i < arr.length; i++) {
-        for (var j = 0; j < arr[i].length; j++) {
-            exclude?.forEach(el => {
-                if(el-1<op2[i][1]){
-                    arr[i][el-1][j]=false;
-                    arr[i][j][el-1]=false;
-                }
+       // for (var j = 0; j < arr[i].length; j++) {
+            numbers?.forEach(el => {
+                numbers?.forEach(el2 => {
+                    if(el-1<op2[i][1]){
+                        arr[i][el-1][el2-1]=true;
+                        arr[i][el2-1][el-1]=true;
+                    }
+                });
             });
-        }
+        //}
     }
     for (var i = 0; i < arr.length; i++) {
         for (var j = 0; j < arr[i].length; j++) {
-            excluderange?.forEach(el => {
+            range?.forEach(el => {
                 let r=el.match(/\d+/g);
                 if(r[0]<0) r[0]=0;
                 if(r[1]>arr[i].length) r[1]=arr[i].length;
                 for(let k=r[0];k<=r[1];++k){
                     if(k-1<op2[i][1]){
-                        arr[i][k-1][j]=false;
-                        arr[i][j][k-1]=false;
+                        arr[i][k-1][j]=true;
+                        arr[i][j][k-1]=true;
                     }
                 }
             });
