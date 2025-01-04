@@ -76,3 +76,9 @@ li a:hover {
  input[type="number"] {
      -moz-appearance: textfield;
  }
+
+ /*prevent pwa refresh on scroll*/
+ html,
+body {
+    overscroll-behavior-y: contain;
+}
