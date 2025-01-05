@@ -48,6 +48,10 @@ li a {
   text-decoration: none;
 }
 
+li label {
+  color: white;
+}
+
 li a:hover {
   background-color: #111111;
 }

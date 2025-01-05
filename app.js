@@ -35,7 +35,21 @@ function wuerfle(ziffernarray){
     return ziffernarray[index];
 }
 
+let maxcount=5;	
+let message="";
+let gamemode=false;
+let lastop=[["*",10]];
+let lasttext=false;
+function game(){
+  document.getElementById("menu").style.display="none";
+  gamemode=true;
+ // maxcount=prompt("Wie viele Korrekturen hintereinander? (Standard: 5)","5");
+  message=prompt("Geheime Nachricht für den Gewinner:","Gewonnen!");
 
+  count=0;
+  start(lastop,lasttext);
+}
+document.getElementById("game").onclick = game;
 document.getElementById("startadd").onclick = ()=>{start([["+",10]])};
 document.getElementById("startadd2").onclick = ()=>{start([["+",100]])};
 document.getElementById("startsub").onclick = ()=>{start([["-",10]])};
@@ -65,7 +79,10 @@ function update(){
   });
 }
 let arr;
+
 async function start(op2,text=false){
+    lastop=op2.slice();
+    lasttext=text;
     for(let i=0;i<op2.length;++i){
         op2[i].push(i);//put index into op2[i][2]
     }
@@ -257,6 +274,7 @@ async function start(op2,text=false){
 
 
 async function check(){
+    let errors=0;
     for(let i=0;i<20;++i){
         for(let j=0;j<5;++j){
             let td=document.getElementById(i+"_"+j);
@@ -267,6 +285,7 @@ async function check(){
             }
             if(input.value=="") {
                 td.style.backgroundColor="white";
+                errors++;
                 continue;
             }
             let html=td.innerHTML.trim();
@@ -287,6 +306,7 @@ async function check(){
                     else td.style.backgroundColor="lightgreen";
                 }else{
                     td.style.backgroundColor="pink";
+                    errors++;
                 }
             }
             catch(err){
@@ -294,5 +314,14 @@ async function check(){
             }
         }
         
+    }
+    if(gamemode){
+        if(errors==0){
+            document.getElementById("comment").innerHTML = message;
+            document.getElementById("comment").style.color="lightgreen";
+            document.getElementById("menu").style.display="block";
+            document.getElementById("input").value = "";
+            gamemode=false;
+        }
     }
 }
